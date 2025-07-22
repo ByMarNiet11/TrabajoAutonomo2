@@ -1,4 +1,4 @@
-// src/components/index.js
+// src/components/inicio.js
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -36,9 +36,7 @@ function ModalContacto({ show, onClose }) {
   );
 }
 
-
 function Inicio({ usuarioLogeado, cerrarSesion }) {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -58,10 +56,12 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
             )}
             {usuarioLogeado && (
               <li>
-                <button onClick={cerrarSesion}>Cerrar Sesión</button>
+                <button onClick={cerrarSesion} className="logout-button">
+                  Cerrar Sesión
+                </button>
               </li>
             )}
-            <li><a href="#contacto"onClick={handleOpenModal}>Contacto</a></li>
+            <li><a href="#contacto" onClick={handleOpenModal}>Contacto</a></li>
           </ul>
         </nav>
       </header>
@@ -159,7 +159,6 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
       
       {/* Modal */}
       <ModalContacto show={isModalOpen} onClose={handleCloseModal} />
-
     </div>
   );
 }

@@ -87,6 +87,7 @@
 
 .form-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .form-group label {
@@ -100,11 +101,12 @@
 .form-input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #e6ccb2;
+  padding-right: 40px; /* Espacio para el icono de validación */
+  border: 2px solid #e6ccb2;
   border-radius: 8px;
   font-size: 1em;
   background-color: #fff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   box-sizing: border-box;
   color: #3e2c23;
 }
@@ -113,6 +115,84 @@
   outline: none;
   border-color: #b08968;
   box-shadow: 0 0 0 2px rgba(176, 137, 104, 0.2);
+}
+
+/* Estilos de validación - ROJO para errores */
+.form-input.invalid {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+}
+
+.form-input.invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);
+}
+
+/* Estilos de validación - VERDE para campos válidos */
+.form-input.valid {
+  border-color: #28a745;
+  background-color: #f8fff9;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+}
+
+.form-input.valid:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+}
+
+/* Mensajes de error */
+.error-message {
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
+  display: block;
+  font-weight: normal;
+}
+
+/* Mensajes de éxito */
+.success-message {
+  color: #28a745;
+  font-size: 0.85em;
+  margin-top: 5px;
+  display: block;
+  font-weight: normal;
+}
+
+/* Iconos de validación - ARREGLADO para evitar conflicto con el ojito */
+.form-group::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 38px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.form-group.invalid::after {
+  content: '❌';
+  font-size: 16px;
+}
+
+.form-group.valid::after {
+  content: '✅';
+  font-size: 16px;
+}
+
+/* Ocultar el ojito del navegador en campos de contraseña */
+.form-input[type="password"]::-ms-reveal,
+.form-input[type="password"]::-ms-clear {
+  display: none;
+}
+
+.form-input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+
+.form-input[type="password"]::-webkit-strong-password-auto-fill-button {
+  display: none !important;
 }
 
 .form-button {
@@ -129,13 +209,19 @@
   margin-bottom: 20px;
 }
 
-.form-button:hover {
+.form-button:hover:not(:disabled) {
   background: #7c5e48;
   transform: translateY(-1px);
 }
 
 .form-button:active {
   transform: translateY(0);
+}
+
+.form-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .form-footer {
@@ -216,6 +302,7 @@
   
   .form-input {
     padding: 10px;
+    padding-right: 35px;
   }
   
   .form-button {

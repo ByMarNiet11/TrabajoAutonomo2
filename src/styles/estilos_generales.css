@@ -41,16 +41,44 @@ nav ul {
     gap: 20px;
     padding: 0;
     margin: 0;
+    align-items: center;
 }
 
 nav a {
     text-decoration: none;
     color: #7c5e48;
     font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 nav a:hover {
     color: #b08968;
+    background-color: rgba(176, 137, 104, 0.1);
+}
+
+/* Estilo para el botón de cerrar sesión */
+nav button {
+    background: #b08968;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-family: Arial, sans-serif;
+}
+
+nav button:hover {
+    background: #7c5e48;
+    transform: translateY(-1px);
+}
+
+nav button:active {
+    transform: translateY(0);
 }
 
 .presentacion {
@@ -348,4 +376,40 @@ footer {
 
 .cerrar:hover::before {
     color: #ffffff;
+}
+
+/* Responsive para el header */
+@media (max-width: 768px) {
+    header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    nav ul {
+        gap: 15px;
+    }
+    
+    nav button,
+    nav a {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    nav button,
+    nav a {
+        width: 100%;
+        text-align: center;
+    }
 }
