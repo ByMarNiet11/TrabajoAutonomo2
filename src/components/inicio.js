@@ -52,8 +52,8 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
           <ul>
             {!usuarioLogeado && (
               <>
-                <li><a href="#login">Iniciar Sesión</a></li>
-                <li><a href="#signup">Registrarse</a></li>
+                <li><Link to="/login">Iniciar Sesión</Link></li>
+                <li><Link to="/signup">Registrarse</Link></li>
               </>
             )}
             {usuarioLogeado && (

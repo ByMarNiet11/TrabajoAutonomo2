@@ -1,0 +1,262 @@
+/* Estilos para Login y Signup - Adaptado al estilo original */
+.auth-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4ece4 url('../assets/Ingredientes.png');
+  background-attachment: scroll;
+  background-size: cover;
+  color: #3e2c23;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-header {
+  background: #fff5e9;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #b08968;
+}
+
+.auth-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+  color: #a97155;
+}
+
+.logo-section h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #a97155;
+}
+
+.auth-link {
+  text-decoration: none;
+  color: #7c5e48;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.auth-link:hover {
+  color: #b08968;
+  background-color: rgba(176, 137, 104, 0.1);
+}
+
+.auth-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-form-container {
+  background: #fff5e9;
+  border: 2px solid #b08968;
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.form-title {
+  text-align: center;
+  color: #a97155;
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #7c5e48;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 1em;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e6ccb2;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  color: #3e2c23;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #b08968;
+  box-shadow: 0 0 0 2px rgba(176, 137, 104, 0.2);
+}
+
+.form-button {
+  width: 100%;
+  background: #b08968;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.form-button:hover {
+  background: #7c5e48;
+  transform: translateY(-1px);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+.form-footer {
+  text-align: center;
+  color: #7c5e48;
+  margin: 0;
+  font-size: 1em;
+}
+
+.form-link {
+  color: #a97155;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.form-link:hover {
+  color: #b08968;
+  text-decoration: underline;
+}
+
+.auth-footer {
+  background: #b08968;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px 12px 0 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto;
+}
+
+.auth-footer p {
+  margin: 0;
+  font-size: 1em;
+}
+
+/* Efectos adicionales para mantener consistencia */
+.form-input:hover {
+  border-color: #b08968;
+}
+
+.auth-form-container:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Responsive - manteniendo el estilo original */
+@media (max-width: 768px) {
+  .auth-header {
+    padding: 15px;
+  }
+  
+  .logo-section h1 {
+    font-size: 1.5em;
+  }
+  
+  .auth-form-container {
+    padding: 30px 20px;
+    margin: 0 10px;
+  }
+  
+  .form-title {
+    font-size: 1.6em;
+  }
+  
+  .auth-main {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form-container {
+    padding: 25px 15px;
+  }
+  
+  .form-title {
+    font-size: 1.4em;
+  }
+  
+  .form-input {
+    padding: 10px;
+  }
+  
+  .form-button {
+    padding: 10px;
+  }
+}
+
+/* Animaciones suaves como en el estilo original */
+.auth-form-container {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  animation: slideIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+.form-group:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
