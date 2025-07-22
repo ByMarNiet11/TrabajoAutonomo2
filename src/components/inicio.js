@@ -1,11 +1,32 @@
-// src/components/Inicio.js
-import React from "react";
-import '../styles/pagina_inicio.css';
+// src/components/index.js
 
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/estilos_generales.css";
 
 function Inicio({ usuarioLogeado, cerrarSesion }) {
   return (
-    <>
+    <div className="pagina-inicio">
+      <header>
+        <h1>🍳 La Hueca, recetario</h1>
+        <nav>
+          <ul>
+            {!usuarioLogeado && (
+              <>
+                <li><a href="#login">Iniciar Sesión</a></li>
+                <li><a href="#signup">Registrarse</a></li>
+              </>
+            )}
+            {usuarioLogeado && (
+              <li>
+                <button onClick={cerrarSesion}>Cerrar Sesión</button>
+              </li>
+            )}
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+        </nav>
+      </header>
+
       <main>
         <section className="presentacion">
           <h2>Bienvenido a La Hueca</h2>
@@ -13,10 +34,18 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
         </section>
 
         <section className="descripcion-general">
-          <p style={{ margin: "auto", color: "#5a4a3f", fontSize: "1.12em", textAlign: "center" }}>
-            La Hueca es tu espacio culinario ideal para explorar, compartir y guardar recetas caseras. 
-            Aquí podrás encontrar platillos clásicos y modernos, desde opciones rápidas 
-            para el día a día hasta preparaciones especiales para sorprender.
+          <p
+            style={{
+              margin: "auto",
+              color: "#5a4a3f",
+              fontSize: "1.12em",
+              textAlign: "center",
+            }}
+          >
+            La Hueca es tu espacio culinario ideal para explorar, compartir y
+            guardar recetas caseras. Aquí podrás encontrar platillos clásicos y
+            modernos, desde opciones rápidas para el día a día hasta
+            preparaciones especiales para sorprender.
           </p>
           <br />
         </section>
@@ -31,10 +60,10 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
                 alt="Receta 1"
               />
               <p>
-                Jugoso pollo al horno con piel crujiente y dorada, sazonado con hierbas aromáticas 
-                y un toque de ajo. Una receta clásica, fácil de preparar, 
-                perfecta para una comida familiar o una cena especial. 
-                ¡Sabor casero que nunca falla!
+                Jugoso pollo al horno con piel crujiente y dorada, sazonado con
+                hierbas aromáticas y un toque de ajo. Una receta clásica, fácil
+                de preparar, perfecta para una comida familiar o una cena
+                especial. ¡Sabor casero que nunca falla!
               </p>
             </article>
             <article className="receta">
@@ -44,9 +73,9 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
                 alt="Receta 2"
               />
               <p>
-                Ensalada César clásica con lechuga fresca, pollo a la parrilla, 
-                crutones crujientes y aderezo César cremoso. 
-                Ideal como plato principal o acompañamiento. ¡Una opción saludable y deliciosa!
+                Ensalada César clásica con lechuga fresca, pollo a la parrilla,
+                crutones crujientes y aderezo César cremoso. Ideal como plato
+                principal o acompañamiento. ¡Una opción saludable y deliciosa!
               </p>
             </article>
             <article className="receta">
@@ -56,9 +85,10 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
                 alt="Receta 3"
               />
               <p>
-                Espaguetis al dente mezclados con una salsa cremosa de yema de huevo, 
-                queso parmesano y panceta crujiente. Un plato italiano clásico, 
-                fácil de preparar y lleno de sabor. Ideal para una cena rápida y deliciosa.
+                Espaguetis al dente mezclados con una salsa cremosa de yema de
+                huevo, queso parmesano y panceta crujiente. Un plato italiano
+                clásico, fácil de preparar y lleno de sabor. Ideal para una cena
+                rápida y deliciosa.
               </p>
             </article>
           </div>
@@ -68,25 +98,27 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
           <section className="tarjetas" id="seccionTarjetas">
             <h3>Acciones disponibles</h3>
             <div className="movimiento_tarjetas">
-              <a className="tarjeta1" href="/subir_recetas">
+              <Link className="tarjeta1" to="/subir_recetas">
                 <div className="icono">🍽️</div>
                 <p>Subir receta</p>
-              </a>
-              <a className="tarjeta2" href="/buscar">
+              </Link>
+              <Link className="tarjeta2" to="/buscar">
                 <div className="icono">📖</div>
                 <p>Mis recetas</p>
-              </a>
-              <a className="tarjeta3" href="/editar_perfil">
+              </Link>
+              <Link className="tarjeta3" to="/editar_perfil">
                 <div className="icono">📝</div>
                 <p>Editar perfil</p>
-              </a>
+              </Link>
             </div>
           </section>
         )}
       </main>
 
-      {/* Pendiente el Bootstrap React*/}
-    </>
+      <footer>
+        <p>© 2025 La Hueca. Todos los derechos reservados.</p>
+      </footer>
+    </div>
   );
 }
 

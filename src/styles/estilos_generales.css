@@ -1,11 +1,21 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background: #f4ece4;
-    color: #3e2c23;
-    background-image: url('../assets/Ingredientes.png');
-    background-attachment:scroll;
+    padding: 0;
+    background: #f4ece4 url('../assets/Ingredientes.png');
+    background-attachment: scroll;
     background-size: cover;
+    color: #3e2c23;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
 }
 
 header {
@@ -41,12 +51,6 @@ nav a:hover {
     color: #b08968;
 }
 
-main {
-    padding: 20px;
-    max-width: 1000px;
-    margin: auto;
-}
-
 .presentacion {
     background: #b08968;
     color: white;
@@ -68,12 +72,24 @@ main {
     gap: 20px;
     justify-content: center;
 }
+
+.resultados {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
 .receta {
     background: #fff;
     border-radius: 12px;
-    width: 300px;
+    width: 280px;
+    max-width: 300px;
     overflow: hidden;
     border: 1px solid #e6ccb2;
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .receta img {
@@ -93,20 +109,54 @@ main {
     color: #7c5e48;
     font-size: 0.95em;
 }
+
 .receta:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.buscador {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+    background: #b08968;
+    color: white;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.buscador input {
+    width: 70%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.buscador button {
+    padding: 10px 20px;
+    border: none;
+    background: #7c5e48;
+    color: white;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.buscador button:hover {
+    background: #5e4131;
+}
 
 footer {
     background: #b08968;
     color: white;
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
     border-radius: 12px 12px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
 }
 
 .tarjetas {
@@ -124,7 +174,6 @@ footer {
 .tarjeta1,
 .tarjeta2,
 .tarjeta3 {
-    
     background-color: #ffffff;
     border: 1px solid #e6ccb2;
     border-radius: 12px;
@@ -154,7 +203,7 @@ footer {
     color: #b08968;
 }
 
-
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -267,6 +316,7 @@ footer {
 .botones button[type="button"]:hover {
     background-color: #d4b896;
 }
+
 .modal-content {
     background-color: #fff5e9;
     border-radius: 12px;

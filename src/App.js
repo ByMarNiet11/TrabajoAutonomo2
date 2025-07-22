@@ -1,6 +1,8 @@
 // src/App.js
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Inicio from "./components/inicio";
+import BuscarRecetas from "./components/buscar";
 
 function App() {
   const [usuarioLogeado, setUsuarioLogeado] = useState(
@@ -17,31 +19,15 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <header>
-        <h1>🍳 La Hueca, recetario</h1>
-        <nav>
-          <ul>
-            {!usuarioLogeado && (
-              <>
-                <li><a href="#login">Iniciar Sesión</a></li>
-                <li><a href="#signup">Registrarse</a></li>
-              </>
-            )}
-            {usuarioLogeado && (
-              <li>
-                <button onClick={cerrarSesion}>Cerrar Sesión</button>
-              </li>
-            )}
-            <li><a href="#contact">Contacto</a></li>
-          </ul>
-        </nav>
-      </header>
-
-      <Inicio usuarioLogeado={usuarioLogeado} cerrarSesion={cerrarSesion} />
-
-      <footer>© 2025 La Hueca. Todos los derechos reservados.</footer>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={<Inicio usuarioLogeado={usuarioLogeado} cerrarSesion={cerrarSesion} />}
+        />
+        <Route path="/buscar" element={<BuscarRecetas />} />
+      </Routes>
+    </Router>
   );
 }
 
