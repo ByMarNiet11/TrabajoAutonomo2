@@ -1,319 +1,329 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../styles/auth.css";
+"use client"
+
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import "../styles/auth.css"
 
 function Signup({ setUsuarioLogeado }) {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate() // Para navegar entre páginas
+
+  // Estado para los datos del formulario
+  const [datosFormulario, setDatosFormulario] = useState({
     nombre: "",
     telefono: "",
     usuario: "",
     contraseña: "",
-    confirmarContraseña: ""
-  });
+    confirmarContraseña: "",
+  })
 
-  const [validation, setValidation] = useState({
-    nombre: { isValid: false, message: "" },
-    telefono: { isValid: false, message: "" },
-    usuario: { isValid: false, message: "" },
-    contraseña: { isValid: false, message: "" },
-    confirmarContraseña: { isValid: false, message: "" }
-  });
+  // Estado para los errores de validación
+  const [errores, setErrores] = useState({})
 
-  const [isFormValid, setIsFormValid] = useState(false);
+  // Función para validar un campo específico
+  const validarCampo = (nombre, valor) => {
+    let esValido = true
+    let mensaje = ""
 
-  // Función para validar cada campo
-  const validateField = (name, value) => {
-    let isValid = false;
-    let message = "";
-
-    switch (name) {
+    switch (nombre) {
       case "nombre":
-        const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-        if (value.length < 3) {
-          message = "El nombre debe tener al menos 3 caracteres";
-          isValid = false;
-        } else if (!nameRegex.test(value)) {
-          message = "El nombre solo puede contener letras";
-          isValid = false;
-        } else {
-          message = "Nombre válido";
-          isValid = true;
+        // Solo letras y espacios
+        const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
+        if (valor.length < 3) {
+          esValido = false
+          mensaje = "El nombre debe tener al menos 3 caracteres"
+        } else if (!regexNombre.test(valor)) {
+          esValido = false
+          mensaje = "El nombre solo puede contener letras"
         }
-        break;
+        break
 
       case "telefono":
-        const phoneRegex = /^\d{10}$/;
-        if (!phoneRegex.test(value)) {
-          message = "El teléfono debe tener exactamente 10 números";
-          isValid = false;
-        } else {
-          message = "Teléfono válido";
-          isValid = true;
+        // Solo números, exactamente 10 dígitos
+        const regexTelefono = /^\d{10}$/
+        if (!regexTelefono.test(valor)) {
+          esValido = false
+          mensaje = "El teléfono debe tener exactamente 10 números"
         }
-        break;
+        break
 
       case "usuario":
-        if (value.length < 3) {
-          message = "El usuario debe tener al menos 3 caracteres";
-          isValid = false;
-        } else {
-          message = "Usuario válido";
-          isValid = true;
+        if (valor.length < 3) {
+          esValido = false
+          mensaje = "El usuario debe tener al menos 3 caracteres"
         }
-        break;
+        break
 
       case "contraseña":
-        if (value.length < 3) {
-          message = "La contraseña debe tener al menos 3 caracteres";
-          isValid = false;
-        } else {
-          message = "Contraseña válida";
-          isValid = true;
+        if (valor.length < 3) {
+          esValido = false
+          mensaje = "La contraseña debe tener al menos 3 caracteres"
         }
-        break;
+        break
 
       case "confirmarContraseña":
-        if (value !== formData.contraseña) {
-          message = "Las contraseñas no coinciden";
-          isValid = false;
-        } else if (value.length === 0) {
-          message = "Confirma tu contraseña";
-          isValid = false;
-        } else {
-          message = "Las contraseñas coinciden";
-          isValid = true;
+        if (valor !== datosFormulario.contraseña) {
+          esValido = false
+          mensaje = "Las contraseñas no coinciden"
+        } else if (valor.length === 0) {
+          esValido = false
+          mensaje = "Confirma tu contraseña"
         }
-        break;
-
-      default:
-        break;
+        break
     }
 
-    return { isValid, message };
-  };
+    return { esValido, mensaje }
+  }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    
-    // Restricciones de entrada
-    let filteredValue = value;
-    
+  // Función que se ejecuta cuando el usuario escribe en un campo
+  const manejarCambio = (e) => {
+    const { name, value } = e.target
+    let valorFiltrado = value
+
+    // Aplicar filtros específicos según el campo
     if (name === "telefono") {
-      // Solo permitir números
-      filteredValue = value.replace(/\D/g, '');
-      // Limitar a 10 dígitos
-      if (filteredValue.length > 10) {
-        filteredValue = filteredValue.slice(0, 10);
-      }
+      // Solo permitir números y máximo 10 dígitos
+      valorFiltrado = value.replace(/\D/g, "").slice(0, 10)
     } else if (name === "nombre") {
       // Solo permitir letras, espacios y acentos
-      filteredValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
-    }
-    
-    setFormData({
-      ...formData,
-      [name]: filteredValue
-    });
-
-    // Validar el campo actual
-    const fieldValidation = validateField(name, filteredValue);
-    
-    let updatedValidation = {
-      ...validation,
-      [name]: fieldValidation
-    };
-
-    // Si cambió la contraseña, revalidar confirmarContraseña
-    if (name === "contraseña" && formData.confirmarContraseña) {
-      const confirmValidation = validateField("confirmarContraseña", formData.confirmarContraseña);
-      updatedValidation.confirmarContraseña = confirmValidation;
+      valorFiltrado = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "")
     }
 
-    setValidation(updatedValidation);
-  };
+    // Actualizar los datos del formulario
+    setDatosFormulario({
+      ...datosFormulario,
+      [name]: valorFiltrado,
+    })
 
-  // Verificar si todo el formulario es válido
-  useEffect(() => {
-    const allFieldsValid = Object.values(validation).every(field => field.isValid);
-    const allFieldsFilled = Object.values(formData).every(value => value.trim() !== "");
-    setIsFormValid(allFieldsValid && allFieldsFilled);
-  }, [validation, formData]);
+    // Validar el campo que cambió
+    const validacion = validarCampo(name, valorFiltrado)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    if (!isFormValid) {
-      alert("Por favor, corrige todos los errores antes de continuar");
-      return;
+    // Actualizar errores
+    if (validacion.esValido) {
+      // Si es válido, quitar el error
+      const nuevosErrores = { ...errores }
+      delete nuevosErrores[name]
+      setErrores(nuevosErrores)
+    } else {
+      // Si no es válido, agregar el error
+      setErrores({
+        ...errores,
+        [name]: validacion.mensaje,
+      })
     }
 
-    const usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios") || "[]");
-    const usuarioExiste = usuariosRegistrados.find(user => user.usuario === formData.usuario);
+    // Si cambió la contraseña, revalidar la confirmación
+    if (name === "contraseña" && datosFormulario.confirmarContraseña) {
+      const validacionConfirmar = validarCampo("confirmarContraseña", datosFormulario.confirmarContraseña)
+      if (!validacionConfirmar.esValido) {
+        setErrores((prev) => ({
+          ...prev,
+          confirmarContraseña: validacionConfirmar.mensaje,
+        }))
+      }
+    }
+  }
 
+  // Función que se ejecuta cuando se envía el formulario
+  const manejarEnvio = (e) => {
+    e.preventDefault() // Evitar que la página se recargue
+
+    // Verificar si hay errores
+    if (Object.keys(errores).length > 0) {
+      alert("Por favor, corrige todos los errores antes de continuar")
+      return
+    }
+
+    // Verificar si todos los campos están llenos
+    const camposVacios = Object.values(datosFormulario).some((valor) => valor.trim() === "")
+    if (camposVacios) {
+      alert("Por favor, completa todos los campos")
+      return
+    }
+
+    // Obtener usuarios registrados del localStorage
+    const usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios") || "[]")
+
+    // Verificar si el usuario ya existe
+    const usuarioExiste = usuariosRegistrados.find((user) => user.usuario === datosFormulario.usuario)
     if (usuarioExiste) {
-      alert("Este usuario ya está registrado");
-      return;
+      alert("Este usuario ya está registrado")
+      return
     }
 
+    // Crear nuevo usuario
     const nuevoUsuario = {
-      nombre: formData.nombre,
-      telefono: formData.telefono,
-      usuario: formData.usuario,
-      contraseña: formData.contraseña,
-      fechaRegistro: new Date().toISOString()
-    };
+      nombre: datosFormulario.nombre,
+      telefono: datosFormulario.telefono,
+      usuario: datosFormulario.usuario,
+      contraseña: datosFormulario.contraseña,
+      fechaRegistro: new Date().toISOString(),
+    }
 
-    usuariosRegistrados.push(nuevoUsuario);
-    localStorage.setItem("usuarios", JSON.stringify(usuariosRegistrados));
-    localStorage.setItem("usuarioLogeado", "true");
-    localStorage.setItem("usuario", JSON.stringify(nuevoUsuario));
-    
-    setUsuarioLogeado(true);
-    alert("¡Registro exitoso! Bienvenido a La Hueca");
-    navigate("/");
-  };
+    // Guardar el nuevo usuario
+    usuariosRegistrados.push(nuevoUsuario)
+    localStorage.setItem("usuarios", JSON.stringify(usuariosRegistrados))
 
-  const getFieldClass = (fieldName) => {
-    if (formData[fieldName] === "") return "form-input";
-    return validation[fieldName].isValid ? "form-input valid" : "form-input invalid";
-  };
+    // Iniciar sesión automáticamente
+    localStorage.setItem("usuarioLogeado", "true")
+    localStorage.setItem("usuario", JSON.stringify(nuevoUsuario))
 
-  const getGroupClass = (fieldName) => {
-    if (formData[fieldName] === "") return "form-group";
-    return validation[fieldName].isValid ? "form-group valid" : "form-group invalid";
-  };
+    setUsuarioLogeado(true)
+    alert("¡Registro exitoso! Bienvenido a La Hueca")
+    navigate("/") // Ir a la página principal
+  }
+
+  // Función para determinar la clase CSS del campo según su estado
+  const obtenerClaseCampo = (nombreCampo) => {
+    if (!datosFormulario[nombreCampo]) return "form-input" // Campo vacío
+    return errores[nombreCampo] ? "form-input invalid" : "form-input valid" // Con error o válido
+  }
 
   return (
     <div className="auth-container">
+      {/* Encabezado - ACTUALIZADO CON ENLACE AL INICIO */}
       <header className="auth-header">
         <div className="auth-nav">
           <div className="logo-section">
             <span className="logo-icon">🔍</span>
             <h1>La Hueca, recetario</h1>
           </div>
-          <Link to="/login" className="auth-link">Iniciar Sesión</Link>
+          <div style={{ display: "flex", gap: "15px" }}>
+            <Link to="/" className="auth-link">
+              Inicio
+            </Link>
+            <Link to="/login" className="auth-link">
+              Iniciar Sesión
+            </Link>
+          </div>
         </div>
       </header>
 
+      {/* Contenido principal */}
       <main className="auth-main">
         <div className="auth-form-container">
-          <form className="auth-form" onSubmit={handleSubmit}>
+          <form onSubmit={manejarEnvio}>
             <h2 className="form-title">Registrarse</h2>
-            
-            <div className={getGroupClass("nombre")}>
+
+            {/* Campo de nombre */}
+            <div className="form-group">
               <label htmlFor="nombre">Nombre:</label>
               <input
                 type="text"
                 id="nombre"
                 name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-                className={getFieldClass("nombre")}
+                value={datosFormulario.nombre}
+                onChange={manejarCambio}
+                className={obtenerClaseCampo("nombre")}
                 placeholder="Solo letras"
                 required
               />
-              {formData.nombre && (
-                <span className={validation.nombre.isValid ? "success-message" : "error-message"}>
-                  {validation.nombre.message}
+              {datosFormulario.nombre && (
+                <span className={errores.nombre ? "error-message" : "success-message"}>
+                  {errores.nombre || "Nombre válido"}
                 </span>
               )}
             </div>
 
-            <div className={getGroupClass("telefono")}>
+            {/* Campo de teléfono */}
+            <div className="form-group">
               <label htmlFor="telefono">Teléfono:</label>
               <input
                 type="tel"
                 id="telefono"
                 name="telefono"
-                value={formData.telefono}
-                onChange={handleChange}
-                className={getFieldClass("telefono")}
+                value={datosFormulario.telefono}
+                onChange={manejarCambio}
+                className={obtenerClaseCampo("telefono")}
                 placeholder="Solo números (10 dígitos)"
                 maxLength="10"
                 required
               />
-              {formData.telefono && (
-                <span className={validation.telefono.isValid ? "success-message" : "error-message"}>
-                  {validation.telefono.message}
+              {datosFormulario.telefono && (
+                <span className={errores.telefono ? "error-message" : "success-message"}>
+                  {errores.telefono || "Teléfono válido"}
                 </span>
               )}
             </div>
 
-            <div className={getGroupClass("usuario")}>
+            {/* Campo de usuario */}
+            <div className="form-group">
               <label htmlFor="usuario">Usuario:</label>
               <input
                 type="text"
                 id="usuario"
                 name="usuario"
-                value={formData.usuario}
-                onChange={handleChange}
-                className={getFieldClass("usuario")}
+                value={datosFormulario.usuario}
+                onChange={manejarCambio}
+                className={obtenerClaseCampo("usuario")}
                 required
               />
-              {formData.usuario && (
-                <span className={validation.usuario.isValid ? "success-message" : "error-message"}>
-                  {validation.usuario.message}
+              {datosFormulario.usuario && (
+                <span className={errores.usuario ? "error-message" : "success-message"}>
+                  {errores.usuario || "Usuario válido"}
                 </span>
               )}
             </div>
 
-            <div className={getGroupClass("contraseña")}>
+            {/* Campo de contraseña */}
+            <div className="form-group">
               <label htmlFor="contraseña">Contraseña:</label>
               <input
                 type="password"
                 id="contraseña"
                 name="contraseña"
-                value={formData.contraseña}
-                onChange={handleChange}
-                className={getFieldClass("contraseña")}
+                value={datosFormulario.contraseña}
+                onChange={manejarCambio}
+                className={obtenerClaseCampo("contraseña")}
                 required
               />
-              {formData.contraseña && (
-                <span className={validation.contraseña.isValid ? "success-message" : "error-message"}>
-                  {validation.contraseña.message}
+              {datosFormulario.contraseña && (
+                <span className={errores.contraseña ? "error-message" : "success-message"}>
+                  {errores.contraseña || "Contraseña válida"}
                 </span>
               )}
             </div>
 
-            <div className={getGroupClass("confirmarContraseña")}>
+            {/* Campo de confirmar contraseña */}
+            <div className="form-group">
               <label htmlFor="confirmarContraseña">Confirmar Contraseña:</label>
               <input
                 type="password"
                 id="confirmarContraseña"
                 name="confirmarContraseña"
-                value={formData.confirmarContraseña}
-                onChange={handleChange}
-                className={getFieldClass("confirmarContraseña")}
+                value={datosFormulario.confirmarContraseña}
+                onChange={manejarCambio}
+                className={obtenerClaseCampo("confirmarContraseña")}
                 required
               />
-              {formData.confirmarContraseña && (
-                <span className={validation.confirmarContraseña.isValid ? "success-message" : "error-message"}>
-                  {validation.confirmarContraseña.message}
+              {datosFormulario.confirmarContraseña && (
+                <span className={errores.confirmarContraseña ? "error-message" : "success-message"}>
+                  {errores.confirmarContraseña || "Las contraseñas coinciden"}
                 </span>
               )}
             </div>
 
-            <button 
-              type="submit" 
-              className="form-button"
-              disabled={!isFormValid}
-            >
+            {/* Botón de envío */}
+            <button type="submit" className="form-button">
               Registrarse
             </button>
 
+            {/* Enlace a login */}
             <p className="form-footer">
-              ¿Ya tienes cuenta? <Link to="/login" className="form-link">Inicia sesión aquí</Link>
+              ¿Ya tienes cuenta?{" "}
+              <Link to="/login" className="form-link">
+                Inicia sesión aquí
+              </Link>
             </p>
           </form>
         </div>
       </main>
 
+      {/* Pie de página */}
       <footer className="auth-footer">
         <p>© 2025 La Hueca. Todos los derechos reservados.</p>
       </footer>
     </div>
-  );
+  )
 }
 
-export default Signup;
+export default Signup

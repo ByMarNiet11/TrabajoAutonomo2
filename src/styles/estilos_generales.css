@@ -1,415 +1,410 @@
-/* src/styles/estilos_generales.css */
+/* Estilos generales para toda la aplicación */
 
+/* Configuración básica del body */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4ece4 url('../assets/Ingredientes.png');
-    background-attachment: scroll;
-    background-size: cover;
-    color: #3e2c23;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4ece4 url("../assets/Ingredientes.png");
+  background-attachment: scroll;
+  background-size: cover;
+  color: #3e2c23;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Contenido principal */
 main {
-    flex: 1;
-    padding: 20px;
-    max-width: 1000px;
-    margin: auto;
+  flex: 1;
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
 }
 
+/* Encabezado de la página */
 header {
-    background: #fff5e9;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #b08968;
+  background: #fff5e9;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #b08968;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 1.8em;
-    color: #a97155;
+  margin: 0;
+  font-size: 1.8em;
+  color: #a97155;
 }
 
+/* Navegación */
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-    align-items: center;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  align-items: center;
 }
 
 nav a {
-    text-decoration: none;
-    color: #7c5e48;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: color 0.2s ease, background-color 0.2s ease;
+  text-decoration: none;
+  color: #7c5e48;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 nav a:hover {
-    color: #b08968;
-    background-color: rgba(176, 137, 104, 0.1);
+  color: #b08968;
+  background-color: rgba(176, 137, 104, 0.1);
 }
 
-/* Estilo para el botón de cerrar sesión */
+/* Botón de cerrar sesión */
 nav button {
-    background: #b08968;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    font-family: Arial, sans-serif;
+  background: #b08968;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-family: Arial, sans-serif;
 }
 
 nav button:hover {
-    background: #7c5e48;
-    transform: translateY(-1px);
+  background: #7c5e48;
+  transform: translateY(-1px);
 }
 
-nav button:active {
-    transform: translateY(0);
-}
-
+/* Sección de presentación */
 .presentacion {
-    background: #b08968;
-    color: white;
-    padding: 30px;
-    text-align: center;
-    border-radius: 12px;
-    margin-bottom: 40px;
+  background: #b08968;
+  color: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 40px;
 }
 
+/* Recetas destacadas */
 .recetas-destacadas h2 {
-    text-align: center;
-    color: #a97155;
-    margin-bottom: 20px;
+  text-align: center;
+  color: #a97155;
+  margin-bottom: 20px;
 }
 
 .recetas-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .resultados {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
 
+/* Tarjetas de recetas */
 .receta {
-    background: #fff;
-    border-radius: 12px;
-    width: 280px;
-    max-width: 300px;
-    overflow: hidden;
-    border: 1px solid #e6ccb2;
-    text-align: left;
-    transition: transform 0.2s, box-shadow 0.2s;
+  background: #fff;
+  border-radius: 12px;
+  width: 280px;
+  max-width: 300px;
+  overflow: hidden;
+  border: 1px solid #e6ccb2;
+  text-align: left;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .receta img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
 .receta h3 {
-    margin: 16px;
-    font-size: 1.2em;
-    color: #b08968;
+  margin: 16px;
+  font-size: 1.2em;
+  color: #b08968;
 }
 
 .receta p {
-    padding: 0 16px 16px;
-    color: #7c5e48;
-    font-size: 0.95em;
+  padding: 0 16px 16px;
+  color: #7c5e48;
+  font-size: 0.95em;
 }
 
 .receta:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Buscador */
 .buscador {
-    text-align: center;
-    margin: 40px auto;
-    padding: 20px;
-    background: #b08968;
-    color: white;
-    border-radius: 12px;
-    width: 80%;
-    max-width: 600px;
+  text-align: center;
+  margin: 40px auto;
+  padding: 20px;
+  background: #b08968;
+  color: white;
+  border-radius: 12px;
+  width: 139%;
+  max-width: 800px;
 }
 
 .buscador input {
-    width: 70%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
+  width: 75%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  margin-right: 10px;
+  display: inline-block;
 }
 
 .buscador button {
-    padding: 10px 20px;
-    border: none;
-    background: #7c5e48;
-    color: white;
-    font-size: 1em;
-    border-radius: 8px;
-    cursor: pointer;
+  padding: 12px 20px;
+  border: none;
+  background: #7c5e48;
+  color: white;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .buscador button:hover {
-    background: #5e4131;
+  background: #5e4131;
 }
 
+/* Responsive para el buscador */
+@media (max-width: 768px) {
+  .buscador input {
+    width: 70%;
+    margin-right: 5px;
+  }
+
+  .buscador button {
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .buscador input {
+    width: 65%;
+    margin-bottom: 10px;
+    margin-right: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .buscador button {
+    display: block;
+    margin: 0 auto;
+    width: 65%;
+  }
+}
+
+/* Pie de página */
 footer {
-    background: #b08968;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    border-radius: 12px 12px 0 0;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: auto;
+  background: #b08968;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px 12px 0 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto;
 }
 
+/* Tarjetas de acciones */
 .tarjetas {
-    padding: 40px 20px;
-    text-align: center;
+  padding: 40px 20px;
+  text-align: center;
 }
 
 .movimiento_tarjetas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .tarjeta1,
 .tarjeta2,
 .tarjeta3 {
-    background-color: #ffffff;
-    border: 1px solid #e6ccb2;
-    border-radius: 12px;
-    padding: 20px;
-    width: 250px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s;
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  background-color: #ffffff;
+  border: 1px solid #e6ccb2;
+  border-radius: 12px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .tarjeta1:hover,
 .tarjeta2:hover,
 .tarjeta3:hover {
-    transform: scale(1.05);
-}
-
-.tarjetas h3 {
-    font-size: 1.2em;
-    color: #7c5e48;
-    margin-bottom: 10px;
+  transform: scale(1.05);
 }
 
 .icono {
-    font-size: 2.5em;
-    color: #b08968;
+  font-size: 2.5em;
+  color: #b08968;
 }
 
-/* Modal con animaciones fluidas y notorias */
+/* Modal de contacto */
 .modal {
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    backdrop-filter: blur(0px);
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
 }
 
 .modal.show {
-    opacity: 1;
-    visibility: visible;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(3px);
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-contenido {
-    background-color: #fff5e9;
-    padding: 20px;
-    border: none;
-    border-radius: 16px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transform: translateY(100px) scale(0.6) rotateX(-15deg);
-    opacity: 0;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-color: #fff5e9;
+  padding: 20px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transform: translateY(100px) scale(0.6);
+  opacity: 0;
+  transition: all 0.5s ease;
 }
 
 .modal.show .modal-contenido {
-    transform: translateY(0) scale(1) rotateX(0deg);
-    opacity: 1;
-}
-
-.cerrar {
-    color: #7c5e48;
-    font-size: 20px;
-    font-weight: bold;
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    transition: color 0.2s ease;
-}
-
-.cerrar:hover {
-    color: #b08968;
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 .modal-header {
-    background-color: #b08968;
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 1.3em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: -5px -5px 15px -5px;
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: all 0.4s ease 0.2s;
-}
-
-.modal.show .modal-header {
-    transform: translateY(0);
-    opacity: 1;
+  background-color: #b08968;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 1.3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -5px -5px 15px -5px;
 }
 
 .modal-body {
-    padding: 10px 0;
-    max-height: 300px;
-    overflow-y: auto;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all 0.4s ease 0.3s;
-}
-
-.modal.show .modal-body {
-    transform: translateY(0);
-    opacity: 1;
+  padding: 10px 0;
 }
 
 .contacto-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .contacto-item {
-    background-color: #fff;
-    border: 1px solid #e6ccb2;
-    border-radius: 12px;
-    padding: 15px;
-    font-size: 1em;
-    color: #7c5e48;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateX(-50px) scale(0.8);
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-color: #fff;
+  border: 1px solid #e6ccb2;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 1em;
+  color: #7c5e48;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.modal.show .contacto-item:nth-child(1) { 
-    animation: slideInFromLeft 0.6s ease forwards;
-    animation-delay: 0.4s; 
-}
-.modal.show .contacto-item:nth-child(2) { 
-    animation: slideInFromLeft 0.6s ease forwards;
-    animation-delay: 0.5s; 
-}
-.modal.show .contacto-item:nth-child(3) { 
-    animation: slideInFromLeft 0.6s ease forwards;
-    animation-delay: 0.6s; 
+.cerrar {
+  color: #7c5e48;
+  font-size: 20px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: color 0.2s ease;
 }
 
-@keyframes slideInFromLeft {
-    to {
-        transform: translateX(0) scale(1);
-        opacity: 1;
-    }
+.cerrar:hover {
+  color: #ffffff;
 }
 
 .cerrar::before {
-    content: "\00d7";
-    font-size: 35px;
-    font-weight: bold;
-    color: #7c5e48;
+  content: "\00d7";
+  font-size: 35px;
+  font-weight: bold;
 }
 
-.cerrar:hover::before {
-    color: #ffffff;
-}
-
-/* Responsive para el header */
+/* Diseño responsive */
 @media (max-width: 768px) {
-    header {
-        padding: 15px;
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    header h1 {
-        font-size: 1.5em;
-    }
-    
-    nav ul {
-        gap: 15px;
-    }
-    
-    nav button,
-    nav a {
-        padding: 6px 12px;
-        font-size: 0.9em;
-    }
+  header {
+    padding: 15px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  nav ul {
+    gap: 15px;
+  }
+
+  nav button,
+  nav a {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
 }
 
 @media (max-width: 480px) {
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    nav button,
-    nav a {
-        width: 100%;
-        text-align: center;
-    }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav button,
+  nav a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Asegurarse de que la página de búsqueda tenga altura mínima */
+.buscar-recetas {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.buscar-recetas main {
+  flex: 1;
 }

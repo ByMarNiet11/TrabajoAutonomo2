@@ -1,9 +1,10 @@
-/* Estilos para Login y Signup - Adaptado al estilo original */
+/* Estilos específicos para las páginas de login y registro */
+
 .auth-container {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4ece4 url('../assets/Ingredientes.png');
+  background: #f4ece4 url("../assets/Ingredientes.png");
   background-attachment: scroll;
   background-size: cover;
   color: #3e2c23;
@@ -12,6 +13,7 @@
   flex-direction: column;
 }
 
+/* Encabezado de las páginas de autenticación */
 .auth-header {
   background: #fff5e9;
   padding: 20px;
@@ -59,6 +61,7 @@
   background-color: rgba(176, 137, 104, 0.1);
 }
 
+/* Contenido principal */
 .auth-main {
   flex: 1;
   display: flex;
@@ -67,6 +70,7 @@
   padding: 40px 20px;
 }
 
+/* Contenedor del formulario */
 .auth-form-container {
   background: #fff5e9;
   border: 2px solid #b08968;
@@ -74,7 +78,7 @@
   padding: 40px;
   width: 100%;
   max-width: 450px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .form-title {
@@ -85,6 +89,7 @@
   font-weight: bold;
 }
 
+/* Grupos de campos del formulario */
 .form-group {
   margin-bottom: 20px;
   position: relative;
@@ -98,10 +103,10 @@
   font-size: 1em;
 }
 
+/* Campos de entrada */
 .form-input {
   width: 100%;
   padding: 12px;
-  padding-right: 40px; /* Espacio para el icono de validación */
   border: 2px solid #e6ccb2;
   border-radius: 8px;
   font-size: 1em;
@@ -117,7 +122,7 @@
   box-shadow: 0 0 0 2px rgba(176, 137, 104, 0.2);
 }
 
-/* Estilos de validación - ROJO para errores */
+/* Campo con error */
 .form-input.invalid {
   border-color: #dc3545;
   background-color: #fff5f5;
@@ -129,7 +134,7 @@
   box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);
 }
 
-/* Estilos de validación - VERDE para campos válidos */
+/* Campo válido */
 .form-input.valid {
   border-color: #28a745;
   background-color: #f8fff9;
@@ -159,42 +164,7 @@
   font-weight: normal;
 }
 
-/* Iconos de validación - ARREGLADO para evitar conflicto con el ojito */
-.form-group::after {
-  content: '';
-  position: absolute;
-  right: 12px;
-  top: 38px;
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.form-group.invalid::after {
-  content: '❌';
-  font-size: 16px;
-}
-
-.form-group.valid::after {
-  content: '✅';
-  font-size: 16px;
-}
-
-/* Ocultar el ojito del navegador en campos de contraseña */
-.form-input[type="password"]::-ms-reveal,
-.form-input[type="password"]::-ms-clear {
-  display: none;
-}
-
-.form-input[type="password"]::-webkit-credentials-auto-fill-button {
-  display: none !important;
-}
-
-.form-input[type="password"]::-webkit-strong-password-auto-fill-button {
-  display: none !important;
-}
-
+/* Botón del formulario */
 .form-button {
   width: 100%;
   background: #b08968;
@@ -224,6 +194,7 @@
   transform: none;
 }
 
+/* Pie del formulario */
 .form-footer {
   text-align: center;
   color: #7c5e48;
@@ -242,6 +213,7 @@
   text-decoration: underline;
 }
 
+/* Pie de página */
 .auth-footer {
   background: #b08968;
   color: white;
@@ -258,34 +230,34 @@
   font-size: 1em;
 }
 
-/* Efectos adicionales para mantener consistencia */
+/* Efectos hover */
 .form-input:hover {
   border-color: #b08968;
 }
 
 .auth-form-container:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* Responsive - manteniendo el estilo original */
+/* Diseño responsive */
 @media (max-width: 768px) {
   .auth-header {
     padding: 15px;
   }
-  
+
   .logo-section h1 {
     font-size: 1.5em;
   }
-  
+
   .auth-form-container {
     padding: 30px 20px;
     margin: 0 10px;
   }
-  
+
   .form-title {
     font-size: 1.6em;
   }
-  
+
   .auth-main {
     padding: 20px 10px;
   }
@@ -295,55 +267,16 @@
   .auth-form-container {
     padding: 25px 15px;
   }
-  
+
   .form-title {
     font-size: 1.4em;
   }
-  
+
   .form-input {
     padding: 10px;
-    padding-right: 35px;
   }
-  
+
   .form-button {
     padding: 10px;
-  }
-}
-
-/* Animaciones suaves como en el estilo original */
-.auth-form-container {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form-group {
-  animation: slideIn 0.3s ease-out;
-  animation-fill-mode: both;
-}
-
-.form-group:nth-child(1) { animation-delay: 0.1s; }
-.form-group:nth-child(2) { animation-delay: 0.2s; }
-.form-group:nth-child(3) { animation-delay: 0.3s; }
-.form-group:nth-child(4) { animation-delay: 0.4s; }
-.form-group:nth-child(5) { animation-delay: 0.5s; }
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
