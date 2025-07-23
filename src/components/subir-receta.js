@@ -8,28 +8,21 @@ function SubirReceta() {
   const navigate = useNavigate()
 
   // Estado para los datos del formulario
-  const [datosReceta, setDatosReceta] = useState({
+    const [datosReceta, setDatosReceta] = useState({
     titulo: "",
-    ingredientes: "",
     descripcion: "",
     imagen: "",
-    tiempoPreparacion: "",
-    dificultad: "Fácil",
   })
 
   // Estado para errores
   const [errores, setErrores] = useState({})
 
   // Función para validar el formulario
-  const validarFormulario = () => {
+    const validarFormulario = () => {
     const nuevosErrores = {}
 
     if (datosReceta.titulo.length < 3) {
       nuevosErrores.titulo = "El título debe tener al menos 3 caracteres"
-    }
-
-    if (datosReceta.ingredientes.length < 10) {
-      nuevosErrores.ingredientes = "Describe mejor los ingredientes"
     }
 
     if (datosReceta.descripcion.length < 20) {
@@ -128,25 +121,9 @@ function SubirReceta() {
               {errores.titulo && <span className="error-message">{errores.titulo}</span>}
             </div>
 
-            {/* Ingredientes */}
-            <div className="form-group">
-              <label htmlFor="ingredientes">Ingredientes:</label>
-              <textarea
-                id="ingredientes"
-                name="ingredientes"
-                value={datosReceta.ingredientes}
-                onChange={manejarCambio}
-                className="form-input"
-                placeholder="Ej: 1 pollo, sal, pimienta, aceite de oliva..."
-                rows="3"
-                required
-              />
-              {errores.ingredientes && <span className="error-message">{errores.ingredientes}</span>}
-            </div>
-
             {/* Descripción/Preparación */}
             <div className="form-group">
-              <label htmlFor="descripcion">Preparación:</label>
+              <label htmlFor="descripcion">Descripción:</label>
               <textarea
                 id="descripcion"
                 name="descripcion"
@@ -173,36 +150,6 @@ function SubirReceta() {
                 placeholder="https://ejemplo.com/imagen.jpg"
               />
               {errores.imagen && <span className="error-message">{errores.imagen}</span>}
-            </div>
-
-            {/* Tiempo de preparación */}
-            <div className="form-group">
-              <label htmlFor="tiempoPreparacion">Tiempo de preparación:</label>
-              <input
-                type="text"
-                id="tiempoPreparacion"
-                name="tiempoPreparacion"
-                value={datosReceta.tiempoPreparacion}
-                onChange={manejarCambio}
-                className="form-input"
-                placeholder="Ej: 30 minutos"
-              />
-            </div>
-
-            {/* Dificultad */}
-            <div className="form-group">
-              <label htmlFor="dificultad">Dificultad:</label>
-              <select
-                id="dificultad"
-                name="dificultad"
-                value={datosReceta.dificultad}
-                onChange={manejarCambio}
-                className="form-input"
-              >
-                <option value="Fácil">Fácil</option>
-                <option value="Intermedio">Intermedio</option>
-                <option value="Difícil">Difícil</option>
-              </select>
             </div>
 
             <button type="submit" className="form-button">
