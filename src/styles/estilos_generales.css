@@ -408,3 +408,35 @@ footer {
 .buscar-recetas main {
   flex: 1;
 }
+
+.botones-formulario {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Hacer que ambos botones tengan exactamente el mismo tamaño */
+.botones-formulario button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  border: 1px solid;
+  width: 160px; /* Ancho más grande para que quepa "Subir Receta" */
+  height: 48px; /* Altura fija igual para ambos */
+  box-sizing: border-box; /* Incluir padding y border en el tamaño */
+}
+
+/* Botón Cancelar */
+.form-button-cancelar {
+  background-color: #e6ccb2;
+  color: #7c5e48;
+  border-color: #b08968;
+}
+
+.form-button-cancelar:hover {
+  background-color: #d4b896;
+}

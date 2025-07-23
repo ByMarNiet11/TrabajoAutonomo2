@@ -16,6 +16,9 @@ function SubirReceta() {
 
   // Estado para errores
   const [errores, setErrores] = useState({})
+  // Estado para preview de imagen
+  const [previewImagen, setPreviewImagen] = useState(null)
+
 
   // Función para validar el formulario
     const validarFormulario = () => {
@@ -27,11 +30,6 @@ function SubirReceta() {
 
     if (datosReceta.descripcion.length < 20) {
       nuevosErrores.descripcion = "La descripción debe ser más detallada"
-    }
-
-    // Validar URL de imagen (opcional)
-    if (datosReceta.imagen && !datosReceta.imagen.startsWith("http")) {
-      nuevosErrores.imagen = "Debe ser una URL válida (http://...)"
     }
 
     setErrores(nuevosErrores)
@@ -46,6 +44,39 @@ function SubirReceta() {
       [name]: value,
     })
   }
+
+  // Función para manejar la subida de imagen
+const manejarImagenArchivo = (e) => {
+  const archivo = e.target.files[0]
+  
+  if (!archivo) {
+    setDatosReceta({
+      ...datosReceta,
+      imagen: ""
+    })
+    setPreviewImagen(null)
+    return
+  }
+
+  // Validar tipo de archivo
+  const tiposPermitidos = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
+  if (!tiposPermitidos.includes(archivo.type)) {
+    alert("Solo se permiten archivos de imagen")
+    return
+  }
+
+  // Convertir a base64
+  const reader = new FileReader()
+  reader.onload = (event) => {
+    const imagenBase64 = event.target.result
+    setDatosReceta({
+      ...datosReceta,
+      imagen: imagenBase64
+    })
+    setPreviewImagen(imagenBase64)
+  }
+  reader.readAsDataURL(archivo)
+}
 
   // Función para enviar el formulario
   const manejarEnvio = (e) => {
@@ -141,20 +172,45 @@ function SubirReceta() {
             <div className="form-group">
               <label htmlFor="imagen">Imagen (URL - opcional):</label>
               <input
-                type="url"
+                type="file"
                 id="imagen"
                 name="imagen"
-                value={datosReceta.imagen}
-                onChange={manejarCambio}
+                onChange={manejarImagenArchivo}
                 className="form-input"
-                placeholder="https://ejemplo.com/imagen.jpg"
+                accept="image/*"
               />
+
+              {/* Preview de la imagen */}
+              {previewImagen && (
+                <div style={{ marginTop: "10px" }}>
+                  <img 
+                    src={previewImagen} 
+                    alt="Preview" 
+                    style={{ 
+                      maxWidth: "200px", 
+                      maxHeight: "200px", 
+                      objectFit: "cover",
+                      borderRadius: "8px"
+                    }} 
+                  />
+                </div>
+              )}
               {errores.imagen && <span className="error-message">{errores.imagen}</span>}
             </div>
 
+            <div className="botones-formulario">
             <button type="submit" className="form-button">
               Subir Receta
             </button>
+            
+            <button 
+              type="button" 
+              onClick={() => navigate("/")} 
+              className="form-button-cancelar"
+            >
+              Cancelar
+            </button>
+          </div>
           </form>
         </section>
       </main>
