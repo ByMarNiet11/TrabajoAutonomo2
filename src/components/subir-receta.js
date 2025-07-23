@@ -170,7 +170,7 @@ const manejarImagenArchivo = (e) => {
 
             {/* Imagen (URL) */}
             <div className="form-group">
-              <label htmlFor="imagen">Imagen (URL - opcional):</label>
+              <label htmlFor="imagen">Imagen:</label>
               <input
                 type="file"
                 id="imagen"
