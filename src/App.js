@@ -3,7 +3,7 @@
 // Archivo principal de la aplicación - ACTUALIZADO
 import { useState } from "react"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
-import Inicio from "./components/inicio"
+import Inicio from './components/inicio.tsx'
 import BuscarRecetas from "./components/buscar"
 import Signup from "./components/signup"
 import Login from "./components/login"

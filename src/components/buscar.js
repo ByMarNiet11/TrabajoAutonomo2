@@ -116,9 +116,6 @@ function BuscarRecetas() {
                   <div className="receta" key={index}>
                     <h3>{receta.titulo}</h3>
                     <img src={receta.imagen || "/placeholder.svg"} alt={receta.titulo} />
-                    <p>
-                      <strong>Ingredientes:</strong> {receta.ingredientes}
-                    </p>
                     <p>{receta.descripcion}</p>
                   </div>
                 ))

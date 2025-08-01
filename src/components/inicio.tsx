@@ -4,13 +4,21 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import "../styles/estilos_generales.css"
 
-// Componente del modal de contacto
-function ModalContacto({ mostrar, cerrar }) {
-  // Si no se debe mostrar, no renderizar nada
+// Tipos para el modal de contacto
+interface ModalContactoProps {
+  mostrar: boolean
+  cerrar: () => void
+}
+
+interface Integrante {
+  nombre: string
+  email: string
+}
+
+function ModalContacto({ mostrar, cerrar }: ModalContactoProps) {
   if (!mostrar) return null
 
-  // Lista de integrantes del grupo
-  const integrantes = [
+  const integrantes: Integrante[] = [
     { nombre: "Josué Fernando Palma Zambrano", email: "e1316366937@live.uleam.edu.ec" },
     { nombre: "Yimmi Leonel Barberan Moreira", email: "e1351282171@live.uleam.edu.ec" },
     { nombre: "Marcelo Matias Nieto Medina", email: "e1315170934@live.uleam.edu.ec" },
@@ -39,15 +47,24 @@ function ModalContacto({ mostrar, cerrar }) {
   )
 }
 
-// Componente principal de la página de inicio
-function Inicio({ usuarioLogeado, cerrarSesion }) {
-  // Estado para controlar si el modal está abierto
-  const [modalAbierto, setModalAbierto] = useState(false)
-  // Estado para almacenar todas las recetas (predeterminadas + personalizadas)
-  const [recetas, setRecetas] = useState([])
+// Tipos para las recetas
+interface Receta {
+  titulo: string
+  imagen: string
+  descripcion: string
+}
 
-  // Recetas predeterminadas
-  const recetasPredeterminadas = [
+// Props para el componente Inicio
+interface InicioProps {
+  usuarioLogeado: boolean
+  cerrarSesion: () => void
+}
+
+function Inicio({ usuarioLogeado, cerrarSesion }: InicioProps) {
+  const [modalAbierto, setModalAbierto] = useState<boolean>(false)
+  const [recetas, setRecetas] = useState<Receta[]>([])
+
+  const recetasPredeterminadas: Receta[] = [
     {
       titulo: "Pollo al horno",
       imagen: "https://polloseldorado.co/wp-content/uploads/2023/08/1.jpg",
@@ -67,26 +84,30 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
         "Espaguetis al dente mezclados con una salsa cremosa de yema de huevo, queso parmesano y panceta crujiente. Un plato italiano clásico, fácil de preparar y lleno de sabor. Ideal para una cena rápida y deliciosa.",
     },
   ]
-
-  // Cargar recetas al iniciar
   useEffect(() => {
-    // Obtener recetas personalizadas del localStorage
-    const recetasPersonalizadas = JSON.parse(localStorage.getItem("recetasPersonalizadas") || "[]")
-
-    // Combinar TODAS las recetas: predeterminadas + personalizadas
-    const todasLasRecetas = [...recetasPredeterminadas, ...recetasPersonalizadas]
-
-    setRecetas(todasLasRecetas)
+    const fetchRecetas = async () => {
+      try {
+        const response = await fetch('https://688cda3acd9d22dda5ceb4b8.mockapi.io/api/recetas/Recetas')
+        if (!response.ok) throw new Error('Error al obtener recetas')
+          const data: Receta[] = await response.json()
+        
+        //Combinar con recetas personalizadas guardadas en localStorage
+        const recetasPersonalizadas: Receta[] = JSON.parse(localStorage.getItem("recetasPersonalizadas") || "[]")
+        setRecetas([...data, ...recetasPersonalizadas])
+      } catch (error) {
+        const recetasPersonalizadas: Receta[] = JSON.parse(localStorage.getItem("recetasPersonalizadas") || "[]")
+        setRecetas([...recetasPredeterminadas, ...recetasPersonalizadas])
+      }
+    }
+    fetchRecetas()
   }, [])
 
   return (
     <div className="pagina-inicio">
-      {/* Encabezado de la página */}
       <header>
         <h1>🍳 La Hueca, recetario</h1>
         <nav>
           <ul>
-            {/* Si no está logueado, mostrar botones de login y registro */}
             {!usuarioLogeado && (
               <>
                 <li>
@@ -98,7 +119,6 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
               </>
             )}
 
-            {/* Si está logueado, mostrar botón de cerrar sesión */}
             {usuarioLogeado && (
               <li>
                 <button onClick={cerrarSesion} className="logout-button">
@@ -107,7 +127,6 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
               </li>
             )}
 
-            {/* Botón de contacto siempre visible */}
             <li>
               <button onClick={() => setModalAbierto(true)}>Contacto</button>
             </li>
@@ -116,13 +135,11 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
       </header>
 
       <main>
-        {/* Sección de bienvenida */}
         <section className="presentacion">
           <h2>Bienvenido a La Hueca</h2>
           <p>Descubre recetas deliciosas y fáciles de preparar.</p>
         </section>
 
-        {/* Descripción del sitio */}
         <section className="descripcion-general">
           <p style={{ margin: "auto", color: "#5a4a3f", fontSize: "1.12em", textAlign: "center" }}>
             La Hueca es tu espacio culinario ideal para explorar, compartir y guardar recetas caseras. Aquí podrás
@@ -131,7 +148,6 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
           </p>
         </section>
 
-        {/* Recetas destacadas - AHORA MUESTRA RECETAS PERSONALIZADAS */}
         <section className="recetas-destacadas">
           <h2>Recetas Destacadas</h2>
           <div className="recetas-grid">
@@ -145,23 +161,19 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
           </div>
         </section>
 
-        {/* Tarjetas de acciones - SOLO PARA USUARIOS LOGUEADOS */}
         {usuarioLogeado && (
           <section className="tarjetas">
             <div className="movimiento_tarjetas">
-              {/* Enlace para subir recetas */}
               <Link className="tarjeta1" to="/subir-recetas">
                 <div className="icono">🔖</div>
                 <p>Sube recetas nuevas</p>
               </Link>
 
-              {/* Enlace para buscar recetas */}
               <Link className="tarjeta2" to="/buscar">
                 <div className="icono">🔍</div>
                 <p>Busca tus recetas favoritas</p>
               </Link>
 
-              {/* Enlace para comentarios - VA A LA NUEVA PÁGINA */}
               <Link className="tarjeta3" to="/comentarios">
                 <div className="icono">💬</div>
                 <p>Comenta recetas</p>
@@ -170,7 +182,6 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
           </section>
         )}
 
-        {/* NUEVA SECCIÓN: Acceso rápido para usuarios no logueados */}
         {!usuarioLogeado && (
           <section
             className="acceso-invitado"
@@ -199,8 +210,8 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
                   fontWeight: "bold",
                   transition: "background-color 0.2s ease",
                 }}
-                onMouseOver={(e) => (e.target.style.background = "#7c5e48")}
-                onMouseOut={(e) => (e.target.style.background = "#b08968")}
+                onMouseOver={(e) => (e.currentTarget.style.background = "#7c5e48")}
+                onMouseOut={(e) => (e.currentTarget.style.background = "#b08968")}
               >
                 Registrarse Gratis
               </Link>
@@ -217,12 +228,12 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
                   transition: "all 0.2s ease",
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.background = "#b08968"
-                  e.target.style.color = "white"
+                  e.currentTarget.style.background = "#b08968"
+                  e.currentTarget.style.color = "white"
                 }}
                 onMouseOut={(e) => {
-                  e.target.style.background = "transparent"
-                  e.target.style.color = "#b08968"
+                  e.currentTarget.style.background = "transparent"
+                  e.currentTarget.style.color = "#b08968"
                 }}
               >
                 Explorar Recetas
@@ -232,12 +243,10 @@ function Inicio({ usuarioLogeado, cerrarSesion }) {
         )}
       </main>
 
-      {/* Pie de página */}
       <footer>
         <p>© 2025 La Hueca. Todos los derechos reservados.</p>
       </footer>
 
-      {/* Modal de contacto */}
       <ModalContacto mostrar={modalAbierto} cerrar={() => setModalAbierto(false)} />
     </div>
   )
