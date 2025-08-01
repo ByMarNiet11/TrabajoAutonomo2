@@ -23,7 +23,7 @@ function Signup({ setUsuarioLogeado }) {
   const validarCampo = (nombre, valor) => {
     let esValido = true
     let mensaje = ""
-
+// eslint-disable-next-line default-case
     switch (nombre) {
       case "nombre":
         // Solo letras y espacios
